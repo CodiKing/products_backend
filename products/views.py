@@ -5,10 +5,18 @@ from .serializers import ProductSerializer
 from .models import Products
 from products import serializers
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 def products_list(request):
-    product = Products.objects.all()
+    if request.method == 'GET':
+        products = Products.objects.all()
+        serializer = Products.Serializer(products, many=True)
+        return Response(serializer.data)
 
-    serializer = ProductSerializer(title, many=True)
+    elif request.method == 'POST':
+        serializer == Products.Serializer(data=request.data)
+        serializer.is_valid() == True
+        serializer.save()
+        return Response(serializer.data)
 
-    return Response(serializer.data)
+    else:
+        return Response(serializer.errors)

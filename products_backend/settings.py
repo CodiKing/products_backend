@@ -71,7 +71,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'products_backend.wsgi.application'
 
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False
 
+
+}
 
 
 
